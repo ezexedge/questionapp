@@ -5,9 +5,8 @@ import { THEME } from '../../constants/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     marginVertical: 10,
-    height: 160,
   },
   contentContainer: {
     flex: 1,
@@ -24,9 +23,12 @@ export const styles = StyleSheet.create({
     elevation: 3,
     padding: 10,
   },
+
+  textContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   title: {
-    fontSize: 18,
-    fontFamily: 'Bitter-Medium',
-    color: THEME.colors.white,
+    textAlign: 'left',
   },
 });

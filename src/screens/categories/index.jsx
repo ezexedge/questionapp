@@ -1,4 +1,5 @@
-import React from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback } from 'react';
 import { View, FlatList, SafeAreaView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -7,15 +8,23 @@ import { styles } from './styles';
 import { CategoryItem } from '../../components';
 import { THEME } from '../../constants/theme';
 import { selectCategory } from '../../store/actions';
+import { getQuestion } from '../../store/actions/question.action';
 
 const Categories = ({ navigation }) => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
-  const onSelected = (item) => {
-    dispatch(selectCategory(item.id));
-    navigation.navigate('Products', {
-      title: item.title,
-    });
+  const questions = useSelector((state) => state.question.question);
+
+  console.log('acaaa questions', questions);
+
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(getQuestion());
+    }, [dispatch])
+  );
+
+  const onSelected = () => {
+    navigation.navigate('Products');
   };
 
   const onRedirect = () => {
@@ -27,7 +36,7 @@ const Categories = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Header title="Inicio" redirect onRedirect={onRedirect} />
       <FlatList
-        data={categories}
+        data={questions}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         style={styles.containerList}
