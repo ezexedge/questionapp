@@ -23,8 +23,11 @@ const Categories = ({ navigation }) => {
     }, [dispatch])
   );
 
-  const onSelected = () => {
-    navigation.navigate('Products');
+  const onSelected = (item) => {
+    console.log('SSSs', item);
+    navigation.navigate('Products', {
+      id: item.id,
+    });
   };
 
   const onRedirect = () => {

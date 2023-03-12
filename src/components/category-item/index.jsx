@@ -7,7 +7,7 @@ const BadgedIcon = withBadge(15)(Icon);
 const CategoryItem = ({ item, onSelected }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => onSelected()}>
+      <TouchableOpacity onPress={() => onSelected(item)}>
         <Card>
           <Card.Title style={styles.title}>{item.question}</Card.Title>
           <Card.Divider />
