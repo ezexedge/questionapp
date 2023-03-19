@@ -9,6 +9,7 @@ const {
   GET_QUESTION_SINGLE,
   GET_QUESTION_SINGLE_FAILURE,
   GET_QUESTION_SINGLE_SUCCESS,
+  CREATE_COMMENTS,
 } = questionTypes;
 
 const initialState = {
@@ -25,6 +26,10 @@ const questionReducer = (state = initialState, action) => {
       return {
         ...state,
         result: action.result,
+      };
+    case CREATE_COMMENTS:
+      return {
+        ...state,
       };
     case GET_QUESTION:
       return {
@@ -53,7 +58,7 @@ const questionReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        questionSingle: action.question,
+        questionSingle: action.questionSingle,
       };
     case GET_QUESTION_SINGLE_FAILURE:
       return {

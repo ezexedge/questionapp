@@ -5,6 +5,7 @@ import { questionTypes } from '../types';
 
 const {
   CREATE_QUESTION,
+  CREATE_COMMENTS,
   GET_QUESTION,
   QUESTION_ERROR,
   GET_QUESTION_SUCCESS,
@@ -28,6 +29,7 @@ export const createQuestion = (userId, question) => {
           userId,
           question,
           saved: false,
+          comments: [],
         }),
       });
 
@@ -38,6 +40,65 @@ export const createQuestion = (userId, question) => {
         result,
       });
     } catch (error) {
+      dispatch({
+        type: QUESTION_ERROR,
+        error,
+      });
+    }
+  };
+};
+
+export const createComments = (post, id, comment) => {
+  return async (dispatch) => {
+    try {
+      const users = await fetch(`${REALTIME_DATABASE_URL}/users.json`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const resultUsers = await users.json();
+      const resultUsers1 = Object.keys(resultUsers).map((key) => ({
+        ...resultUsers[key],
+      }));
+
+      const autorUser = resultUsers1.find((user) => user.id === post.userId);
+
+      const firstName = autorUser.firstName;
+      const lastName = autorUser.lastName;
+
+      console.log('ssss///////post', post);
+      const commentPost = !post.comments ? (post.comments = []) : post.comments;
+      const commentObj = {
+        userId: post.userId,
+        firstName,
+        lastName,
+        comment,
+      };
+      commentPost.push(commentObj);
+      console.log('comen', commentPost);
+      const response = await fetch(`${REALTIME_DATABASE_URL}/question/${id}.json`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: post.date,
+          id: post.id,
+          question: post.question,
+          saved: post.saved,
+          userId: post.userId,
+          comments: commentPost,
+        }),
+      });
+
+      const result = await response.json();
+      console.log('eeeeee', result);
+      dispatch({
+        type: CREATE_COMMENTS,
+      });
+    } catch (error) {
+      console.log('ss', error);
       dispatch({
         type: QUESTION_ERROR,
         error,
@@ -154,6 +215,7 @@ export const getQuestionSingle = (id) => {
 
       const result1 = Object.keys(result).map((key) => ({
         ...result[key],
+        idFirebase: key,
       }));
 
       const filterQuestion = result1.find((val) => val.id === id);
