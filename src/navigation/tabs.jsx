@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 import CartNavigator from './cart';
 import OrdersNavigator from './orders';
+import SettingsNavigator from './settings';
 import ShopNavigator from './shop';
 import { THEME } from '../constants/theme';
 
@@ -27,7 +28,7 @@ const Tabs = () => {
         name="ShopTab"
         component={ShopNavigator}
         options={{
-          title: 'Shop',
+          title: 'Home',
           tabBarIcon: ({ focused }) => (
             <Ionicons
               name={focused ? 'home' : 'home-outline'}
@@ -41,10 +42,10 @@ const Tabs = () => {
         name="OrdersTab"
         component={OrdersNavigator}
         options={{
-          title: 'Orders',
+          title: 'Archives',
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              name={focused ? 'file-tray' : 'file-tray-outline'}
+              name={focused ? 'save' : 'save-outline'}
               size={22}
               color={THEME.colors.primary}
             />
@@ -52,24 +53,18 @@ const Tabs = () => {
         }}
       />
       <BottomTab.Screen
-        name="CartTab"
-        component={CartNavigator}
+        name="Settings"
+        component={SettingsNavigator}
         options={{
-          title: 'Cart',
+          headerShown: false,
+          title: 'Settings',
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              name={focused ? 'cart' : 'cart-outline'}
+              name={focused ? 'settings' : 'settings-outline'}
               size={22}
               color={THEME.colors.primary}
             />
           ),
-          tabBarBadge: cart.length,
-          tabBarBadgeStyle: {
-            backgroundColor: THEME.colors.secondary,
-            color: THEME.colors.text,
-            fontFamily: 'Bitter-Bold',
-            fontSize: 11,
-          },
         }}
       />
     </BottomTab.Navigator>

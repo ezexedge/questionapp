@@ -20,6 +20,7 @@ const authReducer = (state = initialState, action) => {
         id: action.id,
         firstName: action.firstName,
         lastName: action.lastName,
+        idFirebase: action.idFirebase,
       };
     case SIGN_IN:
       return {
@@ -29,6 +30,7 @@ const authReducer = (state = initialState, action) => {
         id: action.id,
         firstName: action.firstName,
         lastName: action.lastName,
+        idFirebase: action.idFirebase,
       };
 
     default:

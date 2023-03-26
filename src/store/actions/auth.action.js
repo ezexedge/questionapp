@@ -12,6 +12,7 @@ const { SIGN_UP, SIGN_IN } = authTypes;
 export const signUp = (email, password, firstName, lastName) => {
   return async (dispatch) => {
     try {
+      const idUser = uuid.v4();
       const response = await fetch(URL_AUTH_SIGN_UP, {
         method: 'POST',
         headers: {
@@ -29,8 +30,9 @@ export const signUp = (email, password, firstName, lastName) => {
         headers: {
           'Content-Type': 'application/json',
         },
+
         body: JSON.stringify({
-          id: uuid.v4(),
+          id: idUser,
           email,
           firstName,
           lastName,
@@ -51,6 +53,9 @@ export const signUp = (email, password, firstName, lastName) => {
         type: SIGN_UP,
         token: data.idToken,
         userId: data.localId,
+        id: idUser,
+        firstName,
+        lastName,
       });
     } catch (error) {
       throw error;
@@ -90,6 +95,7 @@ export const signIn = (email, password) => {
 
         const orders = Object.keys(result).map((key) => ({
           ...result[key],
+          idFirebase: key,
         }));
         const findUser = orders.filter((val) => val?.email === email);
         console.log('acaaa order', findUser);
@@ -99,6 +105,7 @@ export const signIn = (email, password) => {
           token: data.idToken,
           userId: data.localId,
           id: findUser[0].id,
+          idFirebase: findUser[0].idFirebase,
           firstName: findUser[0].firstName,
           lastName: findUser[0].lastName,
         });
@@ -108,3 +115,48 @@ export const signIn = (email, password) => {
     }
   };
 };
+
+export const logout = () => {
+  return async (dispatch) => {
+    dispatch({ user: null });
+  };
+};
+/*
+
+falta terminar
+
+export const updateUser = (id, firstName, lastName) => {
+  return async (dispatch) => {
+    try {
+      const response1 = await fetch(`${REALTIME_DATABASE_URL}/users/${id}.json`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const result = await response1.json();
+
+      const orders = Object.keys(result).map((key) => ({
+        ...result[key],
+        idFirebase: key,
+      }));
+      const findUser = orders.filter((val) => val?.email === email);
+      console.log('acaaa order', findUser);
+
+      dispatch({
+        type: SIGN_IN,
+        token: data.idToken,
+        userId: data.localId,
+        id: findUser[0].id,
+        idFirebase: findUser[0].idFirebase,
+        firstName: findUser[0].firstName,
+        lastName: findUser[0].lastName,
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+*/

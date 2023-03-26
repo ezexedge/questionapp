@@ -25,9 +25,7 @@ const Products = ({ route, navigation }) => {
   const category = useSelector((state) => state.category.selected);
   const questionSingle = useSelector((state) => state.question);
   const user = useSelector((state) => state.auth);
-  console.log('ssaaaaaa/////////aa', questionSingle?.questionSingle);
 
-  console.log('ddddddd---------', route.params.from);
   const onBackPress = () => {
     if (route.params.from === 'archived') {
       navigation.navigate('Orders');

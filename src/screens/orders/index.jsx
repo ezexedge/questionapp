@@ -55,7 +55,7 @@ const Orders = ({ navigation }) => {
     <SafeAreaView>
       <Header title="Saved questions" />
       {questionArchive?.questionArchive?.length === 0 ? (
-        <Text>No existe</Text>
+        <Text h1>No tiene archivos</Text>
       ) : (
         <FlatList
           data={questionArchive?.questionArchive}
