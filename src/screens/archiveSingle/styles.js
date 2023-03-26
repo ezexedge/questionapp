@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
     marginVertical: 10,
-    height: 'auto',
     textAlign: 'center',
   },
   title: {
@@ -29,27 +28,9 @@ export const styles = StyleSheet.create({
   },
   commentsContainer: {
     justifyContent: 'center',
-    marginVertical: 5,
+    marginVertical: 40,
   },
   commentsText: {
     textAlign: 'center',
-    marginVertical: 10,
-  },
-  user: {
-    flexDirection: 'row',
-    marginBottom: 6,
-  },
-  image: {
-    width: 30,
-    height: 30,
-    marginRight: 10,
-  },
-  name: {
-    fontSize: 16,
-    marginTop: 5,
-  },
-  card: {
-    marginHorizontal: 0,
-    marginVertical: 0,
   },
 });

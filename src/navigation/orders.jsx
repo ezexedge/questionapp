@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { THEME } from '../constants/theme';
-import { Orders } from '../screens';
+import { ArchiveSingle, Orders } from '../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +13,11 @@ const OrdersNavigator = () => {
         headerShown: false,
       }}>
       <Stack.Screen name="Orders" component={Orders} />
+      <Stack.Screen
+        name="ArchiveSingle"
+        component={ArchiveSingle}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };

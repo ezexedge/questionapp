@@ -6,3 +6,4 @@ export { default as Cart } from './cart/index';
 export { default as Orders } from './orders/index';
 export { default as Auth } from './auth/index';
 export { default as CreatePost } from './createPost/index';
+export { default as ArchiveSingle } from './archiveSingle/index';

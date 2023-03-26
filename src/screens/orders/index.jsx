@@ -1,12 +1,18 @@
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback, useEffect } from 'react';
+import { Card } from '@rneui/themed';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Header from './../../components/header/index';
-import { getQuestionByUser } from './../../store/actions/question.action';
+import {
+  deleteArchive,
+  getQuestionArchiveByUser,
+  getQuestionByUser,
+} from './../../store/actions/question.action';
 import { styles } from './styles';
+import { CategoryItem } from '../../components';
 import OrderItem from '../../components/order-item';
 import { getOrders, deleteOrder } from '../../store/actions/index';
 
@@ -15,27 +21,50 @@ const Orders = ({ navigation }) => {
   const orders = useSelector((state) => state.orders.list);
   const loading = useSelector((state) => state.orders.loading);
   const error = useSelector((state) => state.orders.error);
+  const questionArchive = useSelector((state) => state.question);
+  const [update, setUpdate] = useState(false);
+
   const id = useSelector((state) => state.auth.id);
-
-  console.log('deded', id);
-  const onDelete = (id) => {
-    dispatch(deleteOrder(id));
-  };
-
+  console.log('sss666ccccccc', !questionArchive?.questionArchive);
   useFocusEffect(
     useCallback(() => {
-      dispatch(getQuestionByUser(id));
+      dispatch(getQuestionArchiveByUser(id));
     }, [dispatch])
   );
+  const onSelected = (item) => {
+    navigation.navigate('ArchiveSingle', {
+      id: item.idPost,
+      from: 'archived',
+    });
+  };
 
-  const renderItem = ({ item }) => <OrderItem item={item} onDelete={onDelete} />;
+  const deleteItem = (id) => {
+    dispatch(deleteArchive(id));
+    setUpdate(true);
+  };
+
+  useEffect(() => {
+    dispatch(getQuestionArchiveByUser(id));
+    setUpdate(false);
+  }, [update]);
+  const renderItem = ({ item }) => (
+    <CategoryItem deleteItem={deleteItem} isArchive item={item} onSelected={onSelected} />
+  );
   const keyExtractor = (item) => item.id.toString();
   return (
     <SafeAreaView>
       <Header title="Saved questions" />
-      <View style={styles.container}>
-        <FlatList data={orders} renderItem={renderItem} keyExtractor={keyExtractor} />
-      </View>
+      {questionArchive?.questionArchive?.length === 0 ? (
+        <Text>No existe</Text>
+      ) : (
+        <FlatList
+          data={questionArchive?.questionArchive}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          style={styles.containerList}
+          contentContainerStyle={styles.contentContainerList}
+        />
+      )}
     </SafeAreaView>
   );
 };

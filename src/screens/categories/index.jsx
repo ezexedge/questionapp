@@ -33,7 +33,9 @@ const Categories = ({ navigation }) => {
   const onRedirect = () => {
     navigation.navigate('CreatePost');
   };
-  const renderItem = ({ item }) => <CategoryItem item={item} onSelected={onSelected} />;
+  const renderItem = ({ item }) => (
+    <CategoryItem isArchive={false} item={item} onSelected={onSelected} />
+  );
   const keyExtractor = (item) => item.id.toString();
   return (
     <SafeAreaView style={styles.container}>

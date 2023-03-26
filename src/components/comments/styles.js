@@ -29,11 +29,10 @@ export const styles = StyleSheet.create({
   },
   commentsContainer: {
     justifyContent: 'center',
-    marginVertical: 5,
+    marginVertical: 40,
   },
   commentsText: {
     textAlign: 'center',
-    marginVertical: 10,
   },
   user: {
     flexDirection: 'row',
