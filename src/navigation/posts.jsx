@@ -3,14 +3,14 @@ import { Button, Icon } from '@rneui/themed';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import { THEME } from '../constants/theme';
-import { Categories, ProductDetail, Products, CreatePost } from '../screens/index';
+import { ProductDetail, Products, CreatePost, Posts, SinglePost } from '../screens/index';
 
 const Stack = createNativeStackNavigator();
 
-const ShopNavigator = () => {
+const PostsNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Categories"
+      initialRouteName="Posts"
       screenOptions={{
         headerStyle: {
           backgroundColor: THEME.colors.white,
@@ -23,19 +23,18 @@ const ShopNavigator = () => {
           color: THEME.colors.title,
         },
       }}>
-      <Stack.Screen name="Categories" component={Categories} options={{ headerShown: false }} />
+      <Stack.Screen name="Posts" component={Posts} options={{ headerShown: false }} />
       <Stack.Screen name="CreatePost" component={CreatePost} options={{ headerShown: false }} />
 
-      <Stack.Screen name="Products" component={Products} options={{ headerShown: false }} />
       <Stack.Screen
-        name="ProductDetail"
-        component={ProductDetail}
+        name="SinglePost"
+        component={SinglePost}
         options={({ route }) => ({
-          title: route.params.title,
+          title: 'prueba',
         })}
       />
     </Stack.Navigator>
   );
 };
 
-export default ShopNavigator;
+export default PostsNavigator;

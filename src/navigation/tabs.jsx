@@ -2,10 +2,9 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSelector } from 'react-redux';
 
-import CartNavigator from './cart';
-import OrdersNavigator from './orders';
+import ArchiveNavigator from './archive';
+import PostsNavigator from './posts';
 import SettingsNavigator from './settings';
-import ShopNavigator from './shop';
 import { THEME } from '../constants/theme';
 
 const BottomTab = createBottomTabNavigator();
@@ -26,7 +25,7 @@ const Tabs = () => {
       }}>
       <BottomTab.Screen
         name="ShopTab"
-        component={ShopNavigator}
+        component={PostsNavigator}
         options={{
           title: 'Home',
           tabBarIcon: ({ focused }) => (
@@ -40,7 +39,7 @@ const Tabs = () => {
       />
       <BottomTab.Screen
         name="OrdersTab"
-        component={OrdersNavigator}
+        component={ArchiveNavigator}
         options={{
           title: 'Archives',
           tabBarIcon: ({ focused }) => (

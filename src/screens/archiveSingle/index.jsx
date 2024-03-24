@@ -32,7 +32,7 @@ const ArchiveSingle = ({ route, navigation }) => {
     if (route.params.from === 'archived') {
       navigation.navigate('Orders');
     } else {
-      navigation.navigate('Categories');
+      navigation.navigate('Posts');
     }
   };
 

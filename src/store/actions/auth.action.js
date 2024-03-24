@@ -7,7 +7,7 @@ import {
 } from '../../constants/firebase';
 import { authTypes } from '../types';
 
-const { SIGN_UP, SIGN_IN } = authTypes;
+const { SIGN_UP, SIGN_IN, LOGOUT } = authTypes;
 
 export const signUp = (email, password, firstName, lastName) => {
   return async (dispatch) => {
@@ -24,6 +24,8 @@ export const signUp = (email, password, firstName, lastName) => {
           returnSecureToken: true,
         }),
       });
+
+      console.log('POST RESPONSE: ' + JSON.stringify(response));
 
       const user = await fetch(`${REALTIME_DATABASE_URL}/users.json`, {
         method: 'POST',
@@ -118,7 +120,7 @@ export const signIn = (email, password) => {
 
 export const logout = () => {
   return async (dispatch) => {
-    dispatch({ user: null });
+    dispatch({ type: LOGOUT });
   };
 };
 /*

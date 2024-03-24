@@ -16,7 +16,7 @@ import { CategoryItem } from '../../components';
 import OrderItem from '../../components/order-item';
 import { getOrders, deleteOrder } from '../../store/actions/index';
 
-const Orders = ({ navigation }) => {
+const Archives = ({ navigation }) => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.list);
   const loading = useSelector((state) => state.orders.loading);
@@ -69,4 +69,4 @@ const Orders = ({ navigation }) => {
   );
 };
 
-export default Orders;
+export default Archives;

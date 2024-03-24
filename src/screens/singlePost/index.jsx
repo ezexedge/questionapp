@@ -1,5 +1,4 @@
 import { Text, Badge, Button, Icon, Card, Image } from '@rneui/themed';
-import { style } from 'deprecated-react-native-prop-types/DeprecatedViewPropTypes';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View, TextInput, ScrollView } from 'react-native';
 import EmojiSelector, { Categories } from 'react-native-emoji-selector';
@@ -7,25 +6,28 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Header from './../../components/header/index';
+import { styles } from './styles'; // Asegúrate de que este archivo esté importando los estilos correctamente
+import { ProductItem } from '../../components';
+import Comments from '../../components/comments';
+import Header from '../../components/header/index';
+import { selectProduct, filterProducts } from '../../store/actions';
 import {
   archivedCuestion,
   createComments,
   getQuestionSingle,
-} from './../../store/actions/question.action';
-import { styles } from './styles';
-import { ProductItem } from '../../components';
-import Comments from '../../components/comments';
-import { selectProduct, filterProducts } from '../../store/actions';
+} from '../../store/actions/question.action';
 
-const Products = ({ route, navigation }) => {
+const SinglePost = ({ route, navigation }) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const dispatch = useDispatch();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [comment, setComment] = useState('');
   const [update, setUpdate] = useState(false);
   const category = useSelector((state) => state.category.selected);
   const questionSingle = useSelector((state) => state.question);
   const user = useSelector((state) => state.auth);
 
+  console.log('///aaaaaa');
   const onBackPress = () => {
     if (route.params.from === 'archived') {
       navigation.navigate('Orders');
@@ -149,4 +151,4 @@ const Products = ({ route, navigation }) => {
   );
 };
 
-export default Products;
+export default SinglePost;

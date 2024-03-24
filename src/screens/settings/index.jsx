@@ -16,7 +16,7 @@ import {
 import { styles } from './styles';
 import { ProductItem } from '../../components';
 import Comments from '../../components/comments';
-import { selectProduct, filterProducts } from '../../store/actions';
+import { selectProduct, filterProducts, logout } from '../../store/actions';
 
 const Settings = ({ route, navigation }) => {
   const dispatch = useDispatch();
@@ -29,7 +29,10 @@ const Settings = ({ route, navigation }) => {
     setLastName(user.lastName);
   }, [user]);
 
-  const changeInformation = () => {
+  const changeInformation = () => {};
+
+  const logoutAndRedirect = () => {
+    dispatch(logout());
     navigation.navigate({ name: 'Auth' });
   };
 
@@ -57,7 +60,7 @@ const Settings = ({ route, navigation }) => {
             </Button>
 
             <View style={{ marginVertical: 40 }}>
-              <Button color="error" onPress={() => changeInformation()}>
+              <Button color="error" onPress={() => logoutAndRedirect()}>
                 Logout
               </Button>
             </View>

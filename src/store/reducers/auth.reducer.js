@@ -1,6 +1,6 @@
 import { authTypes } from '../types';
 
-const { SIGN_UP, SIGN_IN } = authTypes;
+const { SIGN_UP, SIGN_IN, LOGOUT } = authTypes;
 
 const initialState = {
   token: null,
@@ -31,6 +31,16 @@ const authReducer = (state = initialState, action) => {
         firstName: action.firstName,
         lastName: action.lastName,
         idFirebase: action.idFirebase,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        token: null,
+        userId: null,
+        id: null,
+        firstName: null,
+        lastName: null,
+        idFirebase: null,
       };
 
     default:

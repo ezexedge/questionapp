@@ -1,15 +1,16 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { THEME } from '../constants/theme';
-import { Cart } from '../screens';
+import { ArchiveSingle, Archives } from '../screens';
 
 const Stack = createNativeStackNavigator();
 
-const CartNavigator = () => {
+const ArchiveNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Cart"
+      initialRouteName="Archive"
       screenOptions={{
+        headerShown: false,
         headerStyle: {
           backgroundColor: THEME.colors.white,
         },
@@ -21,9 +22,14 @@ const CartNavigator = () => {
           color: THEME.colors.title,
         },
       }}>
-      <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name="Archive" component={Archives} />
+      <Stack.Screen
+        name="ArchiveSingle"
+        component={ArchiveSingle}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
 
-export default CartNavigator;
+export default ArchiveNavigator;

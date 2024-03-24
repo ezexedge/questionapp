@@ -3,14 +3,14 @@ import React, { useCallback } from 'react';
 import { View, FlatList, SafeAreaView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Header from './../../components/header/index';
 import { styles } from './styles';
 import { CategoryItem } from '../../components';
+import Header from '../../components/header/index';
 import { THEME } from '../../constants/theme';
 import { selectCategory } from '../../store/actions';
 import { getQuestion } from '../../store/actions/question.action';
-
-const Categories = ({ navigation }) => {
+console.log('sssssssssaaaaaaaa');
+const Posts = ({ navigation }) => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
   const questions = useSelector((state) => state.question.question);
@@ -25,7 +25,7 @@ const Categories = ({ navigation }) => {
 
   const onSelected = (item) => {
     console.log('SSSs', item);
-    navigation.navigate('Products', {
+    navigation.navigate('SinglePost', {
       id: item.id,
     });
   };
@@ -51,4 +51,4 @@ const Categories = ({ navigation }) => {
   );
 };
 
-export default Categories;
+export default Posts;
