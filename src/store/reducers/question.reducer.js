@@ -14,6 +14,12 @@ const {
   GET_QUESTION_SINGLE_SUCCESS,
   CREATE_ARCHIVE_QUESTION,
   CREATE_COMMENTS,
+  QUESTION_LIST_MY_REQUEST,
+  QUESTION_LIST_MY_SUCCESS,
+  QUESTION_LIST_MY_ERROR,
+  QUESTION_SINGLE_MY_REQUEST,
+  QUESTION_SINGLE_MY_SUCCESS,
+  QUESTION_SINGLE_MY_FAIL,
 } = questionTypes;
 
 const initialState = {
@@ -23,9 +29,10 @@ const initialState = {
   questionSingle: null,
   questionArchive: null,
   error: null,
+  questionList: null,
 };
 
-const questionReducer = (state = initialState, action) => {
+export const questionReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_QUESTION:
       return {
@@ -95,4 +102,29 @@ const questionReducer = (state = initialState, action) => {
       return state;
   }
 };
-export default questionReducer;
+
+export const questionListReducer = (state = { questionList: [] }, action) => {
+  switch (action.type) {
+    case QUESTION_LIST_MY_REQUEST:
+      return { loading: action.loading !== undefined ? action.loading : true, questionList: [] };
+    case QUESTION_LIST_MY_SUCCESS:
+      return { loading: false, questionList: action.questionList };
+    case QUESTION_LIST_MY_ERROR:
+      return { loading: false, error: action.error };
+    default:
+      return state;
+  }
+};
+
+export const questionSingleReducer = (state = { questionSingle: null, loading: true }, action) => {
+  switch (action.type) {
+    case QUESTION_SINGLE_MY_REQUEST:
+      return { loading: true, questionSingle: null };
+    case QUESTION_SINGLE_MY_SUCCESS:
+      return { loading: false, questionSingle: action.questionSingle };
+    case QUESTION_SINGLE_MY_FAIL:
+      return { loading: false, error: action.error };
+    default:
+      return state;
+  }
+};

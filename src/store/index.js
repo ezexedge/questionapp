@@ -7,8 +7,12 @@ import {
   cartReducer,
   ordersReducer,
   authReducer,
-  questionReducer,
 } from './reducers';
+import {
+  questionListReducer,
+  questionReducer,
+  questionSingleReducer,
+} from './reducers/question.reducer';
 
 const rootReducer = combineReducers({
   products: productReducer,
@@ -17,6 +21,8 @@ const rootReducer = combineReducers({
   orders: ordersReducer,
   auth: authReducer,
   question: questionReducer,
+  questionList: questionListReducer,
+  questionSingle: questionSingleReducer,
 });
 
 export default createStore(rootReducer, applyMiddleware(thunk));

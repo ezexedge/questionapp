@@ -8,8 +8,6 @@ const BadgedIcon = withBadge(15)(Icon);
 const CategoryItem = ({ deleteItem, item, onSelected, isArchive }) => {
   const [visible1, setVisible1] = useState(false);
 
-  console.log('sssss777', item);
-
   const toggleDialog1 = () => {
     setVisible1(!visible1);
   };

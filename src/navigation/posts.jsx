@@ -26,13 +26,7 @@ const PostsNavigator = () => {
       <Stack.Screen name="Posts" component={Posts} options={{ headerShown: false }} />
       <Stack.Screen name="CreatePost" component={CreatePost} options={{ headerShown: false }} />
 
-      <Stack.Screen
-        name="SinglePost"
-        component={SinglePost}
-        options={({ route }) => ({
-          title: 'prueba',
-        })}
-      />
+      <Stack.Screen name="SinglePost" component={SinglePost} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

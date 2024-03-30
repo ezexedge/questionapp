@@ -17,6 +17,12 @@ const {
   GET_QUESTION_SINGLE_SUCCESS,
   DELETE_ARCHIVE,
   CREATE_ARCHIVE_QUESTION,
+  QUESTION_LIST_MY_REQUEST,
+  QUESTION_LIST_MY_SUCCESS,
+  QUESTION_LIST_MY_FAIL,
+  QUESTION_SINGLE_MY_REQUEST,
+  QUESTION_SINGLE_MY_SUCCESS,
+  QUESTION_SINGLE_MY_FAIL,
 } = questionTypes;
 
 export const createQuestion = (userId, question) => {
@@ -223,12 +229,19 @@ export const getQuestion = () => {
       dispatch({
         type: GET_QUESTION,
       });
+
+      dispatch({
+        type: QUESTION_LIST_MY_REQUEST,
+      });
+
       const response = await fetch(`${REALTIME_DATABASE_URL}/question.json`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       });
+
+      console.log('//////1');
 
       const result = await response.json();
 
@@ -238,14 +251,22 @@ export const getQuestion = () => {
 
       const resultOrder = result1.reverse();
 
-      console.log('DEeded', result1);
       dispatch({
         type: GET_QUESTION_SUCCESS,
         question: resultOrder,
       });
+
+      dispatch({
+        type: QUESTION_LIST_MY_SUCCESS,
+        questionList: resultOrder,
+      });
     } catch (error) {
       dispatch({
         type: QUESTION_ERROR,
+        error,
+      });
+      dispatch({
+        type: QUESTION_LIST_MY_FAIL,
         error,
       });
     }
@@ -327,6 +348,10 @@ export const getQuestionSingle = (id, userId) => {
         type: GET_QUESTION_SINGLE,
       });
 
+      dispatch({
+        type: QUESTION_SINGLE_MY_REQUEST,
+      });
+
       const archived = await fetch(`${REALTIME_DATABASE_URL}/archived.json`, {
         method: 'GET',
         headers: {
@@ -383,15 +408,14 @@ export const getQuestionSingle = (id, userId) => {
       filterQuestion['lastName'] = autorUser.lastName;
       filterQuestion['comments'] = filterQuestion.comments;
       filterQuestion['archived'] = !!isArchived;
-      console.log('s........', autorUser);
       dispatch({
-        type: GET_QUESTION_SINGLE_SUCCESS,
+        type: QUESTION_SINGLE_MY_SUCCESS,
         questionSingle: filterQuestion,
       });
     } catch (error) {
       console.log('ss', error);
       dispatch({
-        type: QUESTION_ERROR,
+        type: QUESTION_SINGLE_MY_FAIL,
         error,
       });
     }

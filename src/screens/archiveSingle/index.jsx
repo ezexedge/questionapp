@@ -30,7 +30,7 @@ const ArchiveSingle = ({ route, navigation }) => {
   console.log('ddddddd---------', route.params.from);
   const onBackPress = () => {
     if (route.params.from === 'archived') {
-      navigation.navigate('Orders');
+      navigation.navigate('Archive');
     } else {
       navigation.navigate('Posts');
     }
